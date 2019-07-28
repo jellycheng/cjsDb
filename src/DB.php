@@ -4,6 +4,8 @@ namespace CjsDb;
 
 class DB
 {
+    const VERSION = '1.0.0';
+
     public static function getFacadeRoot()
     {
         return Database::getInstance()->getManager();

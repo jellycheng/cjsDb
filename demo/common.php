@@ -4,6 +4,7 @@ $vendorFile = dirname(__DIR__)  .  '/vendor/autoload.php';
 if(file_exists($vendorFile)) {
     require $vendorFile;
 } else {
+    require_once dirname(__DIR__)  .  '/src/Helper.php';
     spl_autoload_register(function ($class) {
         $ns = 'CjsDb';
         $base_dir = dirname(__DIR__) . '/src';
