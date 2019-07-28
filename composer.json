@@ -1,0 +1,22 @@
+{
+    "name": "cjs/db",
+    "description": "cjs db",
+    "homepage": "http://www.nfangbian.com",
+    "keywords": [],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "CjsDb\\": "src/"
+        },
+        "files": [
+            "src/Helper.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {}
+    },
+    "suggest": {}
+}
