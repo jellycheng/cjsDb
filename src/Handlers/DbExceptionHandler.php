@@ -1,5 +1,5 @@
 <?php namespace CjsDb\Handlers;
-use Illuminate\Contracts\Debug\ExceptionHandler as DebugExceptionHandler;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use  CjsDb\Exceptions\DbException;
 use Exception;
 //use Log;
@@ -7,7 +7,7 @@ use Exception;
 /**
  * 数据库异常处理类
  */
-class DbExceptionHandler implements DebugExceptionHandler
+class DbExceptionHandler implements ExceptionHandler
 {
     /**
      * Report or log an exception.
@@ -17,7 +17,7 @@ class DbExceptionHandler implements DebugExceptionHandler
      */
     public function report(Exception $e) {
         //Log::error(__METHOD__, ['ExceptionCode'=>$e->getCode(), 'ExceptionMessage'=>$e->getMessage()]);
-        throw new DbException("DATABASE_EXCEPTION");
+        throw new DbException(__METHOD__ . " db异常：".$e->getMessage(), $e->getCode());
     }
 
     /**
@@ -29,7 +29,7 @@ class DbExceptionHandler implements DebugExceptionHandler
      */
     public function render($request, Exception $e){
         //Log::error(__METHOD__, ['ExceptionCode'=>$e->getCode(), 'ExceptionMessage'=>$e->getMessage()]);
-        throw new DbException("DATABASE_EXCEPTION");
+        throw new DbException(__METHOD__ . " db异常：".$e->getMessage(), $e->getCode());
     }
 
     /**
@@ -41,6 +41,6 @@ class DbExceptionHandler implements DebugExceptionHandler
      */
     public function renderForConsole($output, Exception $e){
         //Log::error(__METHOD__, ['ExceptionCode'=>$e->getCode(), 'ExceptionMessage'=>$e->getMessage()]);
-        throw new DbException("DATABASE_EXCEPTION");
+        throw new DbException(__METHOD__ . " db异常：".$e->getMessage(), $e->getCode());
     }
 }

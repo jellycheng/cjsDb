@@ -75,16 +75,21 @@ class Database
     }
 
 
-    public function listen() {
-        $this->getEventObj()->listen('Illuminate\\Database\\Events\\QueryExecuted', function ($queryObj) {
-            $msg = sprintf('sql:%s bindings:%s dbname:%s time:%s',
-                            $queryObj->sql,
-                            var_export($queryObj->bindings, true),
-                            $queryObj->connectionName,
-                            $queryObj->time);
+    public function listen($callback) {
 
-            \CjsDb\writeLog($msg);
+        $this->getEventObj()->listen('Illuminate\\Database\\Events\\QueryExecuted', function ($execObj) use ($callback) {
+            if($callback instanceof \Closure) {
+                call_user_func($callback, $execObj);
+            } else {
+                $msg = sprintf('sql:%s bindings:%s dbname:%s time:%s',
+                                $execObj->sql,
+                                var_export($execObj->bindings, true),
+                                $execObj->connectionName,
+                                $execObj->time);
+                \CjsDb\writeLog($msg);
+            }
         });
+
     }
 
 
